@@ -5,12 +5,13 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Created by kolya on 25.04.2016.
+ * Created by Kolpa on 25.04.2016 use at own risk might be horribly broken...
+ * Probably does some stuff right
  */
 public class KundeVO {
     private static int naechsteID = 0;
 
-    private int ID;
+    private final int ID;
     private String nachname;
     private String vorname;
     private String geschlecht;
@@ -18,27 +19,27 @@ public class KundeVO {
 
     public KundeVO() {
         this.ID = naechsteID;
-        ID++;
+        naechsteID++;
     }
 
     public KundeVO(String nachname, String vorname) {
         this();
-        this.nachname = nachname;
-        this.vorname = vorname;
+        this.setNachname(nachname);
+        this.setVorname(vorname);
     }
 
     public KundeVO(String nachname, String vorname, String geschlecht) {
         this(nachname, vorname);
-        this.geschlecht = geschlecht;
+        this.setGeschlecht(geschlecht);
     }
 
     public KundeVO(String nachname, String vorname, String geschlecht, LocalDate geburtsdatum) {
         this(nachname, vorname, geschlecht);
-        setGeburtsdatum(geburtsdatum);
+        this.setGeburtsdatum(geburtsdatum);
     }
 
     public int getID() {
-        return  this.ID;
+        return this.ID;
     }
 
     public String getNachname() {
@@ -76,22 +77,26 @@ public class KundeVO {
     }
 
     public short berechneAlter() {
-        return (short)Period.between(this.geburtsdatum, LocalDate.now()).getYears();
+        return (short)Period.between(this.getGeburtsdatum(), LocalDate.now()).getYears();
     }
 
     private String getGeburtsdatumStr() {
-        return geburtsdatum.format(DateTimeFormatter.ofPattern("dd.MMM.yyyy"));
+        return this.getGeburtsdatum().format(DateTimeFormatter.ofPattern("dd.MMM.yyyy"));
     }
 
     public boolean equals(Object other) {
+        if (other == null)
+            return false;
+
         if (other.getClass() == this.getClass()) {
             KundeVO kunde = (KundeVO) other;
-            return this.ID == kunde.ID;
+            return this.getID() == kunde.getID();
         }
+
         return false;
     }
 
     public String toString() {
-        return "Kunde " + this.vorname + " " + this.nachname + " ist " + this.geschlecht + " und geboren am " + getGeburtsdatumStr();
+        return "Kunde " + this.getVorname() + " " + this.getNachname() + " ist " + this.getGeschlecht() + " und " + this.berechneAlter() + " Jahre alt geboren am " + this.getGeburtsdatumStr();
     }
 }

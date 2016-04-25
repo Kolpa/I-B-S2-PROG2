@@ -3,12 +3,13 @@ package de.kolpa.thb.pizzapronto;
 import java.util.Arrays;
 
 /**
- * Created by kolya on 25.04.2016.
+ * Created by Kolpa on 25.04.2016 use at own risk might be horribly broken...
+ * What is bigger than 11?                      4
  */
 public class PizzaVO {
     private static int naechsteID;
 
-    private int ID;
+    private final int ID;
     private String name;
     private float preis;
     private String[] zutaten;
@@ -56,32 +57,34 @@ public class PizzaVO {
     private String getZutatenString() {
         String zutatenString = "";
 
-        for (int i = 0; i < this.zutaten.length - 1; i++) {
-            zutatenString += this.zutaten[i] + ", ";
+        for (int i = 0; i < this.getZutaten().length - 1; i++) {
+            zutatenString += this.getZutaten()[i] + ", ";
         }
 
         zutatenString = zutatenString.substring(0, zutatenString.length() - 2);
 
-        zutatenString += " und " + this.zutaten[this.zutaten.length - 1];
+        zutatenString += " und " + this.getZutaten()[this.getZutaten().length - 1];
 
         return zutatenString;
     }
 
-    public PizzaVO clone() throws CloneNotSupportedException {
-        PizzaVO clone = (PizzaVO) super.clone();
-        clone.zutaten = Arrays.copyOf(this.zutaten, this.zutaten.length);
-        return clone;
+    public PizzaVO clone() {
+        return new PizzaVO(this.getName(), this.getPreis(), Arrays.copyOf(this.getZutaten(), this.getZutaten().length));
     }
 
     public boolean equals(Object other) {
+        if (other == null)
+            return false;
+
         if (other.getClass() == this.getClass()) {
             PizzaVO pizza = (PizzaVO) other;
-            return this.ID == pizza.ID;
+            return this.getID() == pizza.getID();
         }
+
         return false;
     }
 
     public String toString() {
-        return "Pizza " + this.name + " mit: " + getZutatenString() + " für " + preis + "€";
+        return "Pizza " + this.getName() + " mit: " + this.getZutatenString() + " für " + this.getPreis() + "€";
     }
 }
