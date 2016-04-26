@@ -54,6 +54,15 @@ public class KochVO {
         this.farbeSchuerze = farbeSchuerze;
     }
 
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.getFarbeSchuerze() == null) ? 0 : this.getFarbeSchuerze().hashCode());
+        result = prime * result + ((this.getNachname() == null) ? 0 : this.getNachname().hashCode());
+        result = prime * result + ((this.getVorname() == null) ? 0 : this.getVorname().hashCode());
+        return result;
+    }
+
     public boolean equals(Object other) {
         if (other == null)
             return false;

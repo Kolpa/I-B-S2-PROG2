@@ -72,6 +72,15 @@ public class PizzaVO {
         return new PizzaVO(this.getName(), this.getPreis(), Arrays.copyOf(this.getZutaten(), this.getZutaten().length));
     }
 
+    public int hashCode() {
+        final int hashMultiplier = 31;
+        int hc = 1;
+        hc = hashMultiplier * hc + ((this.getName() == null) ? 0 : this.getName().hashCode());
+        hc = hashMultiplier * hc + Float.floatToIntBits(this.getPreis());
+        hc = hashMultiplier * hc + Arrays.hashCode(this.getZutaten());
+        return hc;
+    }
+
     public boolean equals(Object other) {
         if (other == null)
             return false;

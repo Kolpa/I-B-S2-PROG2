@@ -68,6 +68,7 @@ public class KundeVO {
 
     public void setGeburtsdatum(LocalDate geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
+
         if (berechneAlter() < 17)
             this.geburtsdatum = null;
     }
@@ -77,11 +78,22 @@ public class KundeVO {
     }
 
     public short berechneAlter() {
-        return (short)Period.between(this.getGeburtsdatum(), LocalDate.now()).getYears();
+        return (short) Period.between(this.getGeburtsdatum(), LocalDate.now()).getYears();
     }
 
     private String getGeburtsdatumStr() {
         return this.getGeburtsdatum().format(DateTimeFormatter.ofPattern("dd.MMM.yyyy"));
+    }
+
+    public int hashCode() {
+        final int hashMultiplier = 47;
+        int hc = 1;
+        hc = hashMultiplier * hc + this.berechneAlter();
+        hc = hashMultiplier * hc + ((this.getGeburtsdatum() == null) ? 0 : this.getGeburtsdatum().hashCode());
+        hc = hashMultiplier * hc + ((this.getGeschlecht() == null) ? 0 : this.getGeschlecht().hashCode());
+        hc = hashMultiplier * hc + ((this.getNachname() == null) ? 0 : this.getNachname().hashCode());
+        hc = hashMultiplier * hc + ((this.getVorname() == null) ? 0 : this.getVorname().hashCode());
+        return hc;
     }
 
     public boolean equals(Object other) {
@@ -99,4 +111,6 @@ public class KundeVO {
     public String toString() {
         return "Kunde " + this.getVorname() + " " + this.getNachname() + " ist " + this.getGeschlecht() + " und " + this.berechneAlter() + " Jahre alt geboren am " + this.getGeburtsdatumStr();
     }
+
+
 }
