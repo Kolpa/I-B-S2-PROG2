@@ -41,6 +41,10 @@ public class KundeVO {
     public int getID() {
         return this.ID;
     }
+    
+	public static int getNaechsteID() {
+		return naechsteID;
+	}
 
     public String getNachname() {
         return nachname;
@@ -78,7 +82,16 @@ public class KundeVO {
     }
 
     public short berechneAlter() {
-        return (short) Period.between(this.getGeburtsdatum(), LocalDate.now()).getYears();
+    	if (this.getGeburtsdatum() == null)
+    		return -1;
+    	
+    	short alter = (short) Period.between(this.getGeburtsdatum(), LocalDate.now()).getYears();
+    	
+    	if (alter < 18)
+    		return -1;
+    	else
+    		return alter;
+    	
     }
 
     private String getGeburtsdatumStr() {
@@ -86,7 +99,7 @@ public class KundeVO {
     }
 
     public int hashCode() {
-        final int hashMultiplier = 47;
+        final int hashMultiplier = 31;
         int hc = 1;
         hc = hashMultiplier * hc + this.berechneAlter();
         hc = hashMultiplier * hc + ((this.getGeburtsdatum() == null) ? 0 : this.getGeburtsdatum().hashCode());

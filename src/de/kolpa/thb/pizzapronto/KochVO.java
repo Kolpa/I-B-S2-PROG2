@@ -7,27 +7,18 @@ import java.awt.*;
  * Thar be dragons
  */
 public class KochVO {
-    private static int naechsteID = 0;
-
-    private final int ID;
     private String nachname;
     private String vorname;
     private Color farbeSchuerze;
 
     public KochVO() {
-        this.ID = naechsteID;
-        naechsteID++;
+    	
     }
 
     public KochVO(String nachname, String vorname, Color farbeSchuerze) {
-        this();
         this.setNachname(nachname);
         this.setVorname(vorname);
         this.setFarbeSchuerze(farbeSchuerze);
-    }
-
-    public int getID() {
-        return  this.ID;
     }
 
     public String getNachname() {
@@ -58,11 +49,11 @@ public class KochVO {
     }
 
     public int hashCode() {
-        final int prime = 31;
+        final int hashMultiplier = 31;
         int result = 1;
-        result = prime * result + ((this.getFarbeSchuerze() == null) ? 0 : this.getFarbeSchuerze().hashCode());
-        result = prime * result + ((this.getNachname() == null) ? 0 : this.getNachname().hashCode());
-        result = prime * result + ((this.getVorname() == null) ? 0 : this.getVorname().hashCode());
+        result = hashMultiplier * result + ((this.getFarbeSchuerze() == null) ? 0 : this.getFarbeSchuerze().hashCode());
+        result = hashMultiplier * result + ((this.getNachname() == null) ? 0 : this.getNachname().hashCode());
+        result = hashMultiplier * result + ((this.getVorname() == null) ? 0 : this.getVorname().hashCode());
         return result;
     }
 
@@ -72,7 +63,7 @@ public class KochVO {
 
         if (other.getClass() == this.getClass()) {
             KochVO koch = (KochVO) other;
-            return this.getID() == koch.getID();
+            return this.hashCode() == koch.hashCode();
         }
 
         return false;

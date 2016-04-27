@@ -1,11 +1,13 @@
 package de.kolpa.thb;
 
+import de.kolpa.thb.pizzapronto.Bestellung;
 import de.kolpa.thb.pizzapronto.KochVO;
 import de.kolpa.thb.pizzapronto.KundeVO;
 import de.kolpa.thb.pizzapronto.PizzaVO;
 
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -42,5 +44,9 @@ public class Main {
         KundeVO kundeVO = new KundeVO("Weasley", "Torben", "männlich", LocalDate.of(191280, 10, 1));
 
         System.out.println(kundeVO);
+        
+        Bestellung best = new Bestellung(LocalDateTime.MIN, LocalDateTime.MAX);
+        
+        System.out.println(best);
     }
 }

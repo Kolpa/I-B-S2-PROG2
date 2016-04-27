@@ -7,29 +7,19 @@ import java.util.Arrays;
  * What is bigger than 11?                      4
  */
 public class PizzaVO implements Cloneable {
-    private static int naechsteID;
-
-    private final int ID;
     private String name;
     private float preis;
     private String[] zutaten;
 
     public PizzaVO() {
-        this.ID = naechsteID;
-        naechsteID++;
     }
 
-    public PizzaVO(String name, float preis, String[] zutaten) {
-        this();
+    public PizzaVO(String name, String[] zutaten, float preis) {
         this.name = name;
         this.preis = preis;
         this.zutaten = zutaten;
     }
-
-    public int getID() {
-        return  this.ID;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -92,10 +82,9 @@ public class PizzaVO implements Cloneable {
     public boolean equals(Object other) {
         if (other == null)
             return false;
-
         if (other.getClass() == this.getClass()) {
             PizzaVO pizza = (PizzaVO) other;
-            return this.getID() == pizza.getID();
+            return this.hashCode() == pizza.hashCode();
         }
 
         return false;
