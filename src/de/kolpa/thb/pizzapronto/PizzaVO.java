@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Created by Kolpa on 25.04.2016 use at own risk might be horribly broken...
  * What is bigger than 11?                      4
  */
-public class PizzaVO {
+public class PizzaVO implements Cloneable {
     private static int naechsteID;
 
     private final int ID;
@@ -57,19 +57,27 @@ public class PizzaVO {
     private String getZutatenString() {
         String zutatenString = "";
 
-        for (int i = 0; i < this.getZutaten().length - 1; i++) {
-            zutatenString += this.getZutaten()[i] + ", ";
+        if (this.getZutaten().length == 1) {
+            zutatenString = this.getZutaten()[0];
+        } else {
+            for (int i = 0; i < this.getZutaten().length - 1; i++) {
+                zutatenString += this.getZutaten()[i] + ", ";
+            }
+
+            zutatenString = zutatenString.substring(0, zutatenString.length() - 2);
+
+            zutatenString += " und " + this.getZutaten()[this.getZutaten().length - 1];
         }
-
-        zutatenString = zutatenString.substring(0, zutatenString.length() - 2);
-
-        zutatenString += " und " + this.getZutaten()[this.getZutaten().length - 1];
 
         return zutatenString;
     }
 
     public PizzaVO clone() {
-        return new PizzaVO(this.getName(), this.getPreis(), Arrays.copyOf(this.getZutaten(), this.getZutaten().length));
+        try {
+            return (PizzaVO) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
     public int hashCode() {

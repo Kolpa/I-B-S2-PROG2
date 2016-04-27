@@ -51,7 +51,10 @@ public class KochVO {
     }
 
     public void setFarbeSchuerze(Color farbeSchuerze) {
-        this.farbeSchuerze = farbeSchuerze;
+        if (farbeSchuerze == null)
+            this.farbeSchuerze = Color.BLACK;
+        else
+            this.farbeSchuerze = farbeSchuerze;
     }
 
     public int hashCode() {

@@ -25,6 +25,14 @@ public class Main {
                 "Bohnerwachs"
         });
 
+        PizzaVO pizzaVO1 = pizzaVO.clone();
+
+        pizzaVO1.setZutaten(new String[] {
+                "Kaffe"
+        });
+
+        System.out.println(pizzaVO1);
+
         System.out.println(pizzaVO);
 
         KochVO kochVO = new KochVO("Weasley", "Torsten", Color.RED);
