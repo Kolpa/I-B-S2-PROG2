@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 
+import de.kolpa.thb.pizzapronto.KundeVO;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,8 +14,8 @@ public class JUnitTestBestellung {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		best1 = new Bestellung(LocalDateTime.now(), LocalDateTime.MAX);
-		best2 = new Bestellung(LocalDateTime.MIN, LocalDateTime.MAX);
+		best1 = new Bestellung(LocalDateTime.now(), LocalDateTime.MAX, new KundeVO());
+		best2 = new Bestellung(LocalDateTime.MIN, LocalDateTime.MAX, new KundeVO());
 	}
 	
 	@Test

@@ -17,6 +17,8 @@ public class KundeVO {
     private String geschlecht;
     private LocalDate geburtsdatum;
 
+    private Bestellung bestellung;
+
     public KundeVO() {
         this.ID = naechsteID;
         naechsteID++;
@@ -36,6 +38,11 @@ public class KundeVO {
     public KundeVO(String nachname, String vorname, String geschlecht, LocalDate geburtsdatum) {
         this(nachname, vorname, geschlecht);
         this.setGeburtsdatum(geburtsdatum);
+    }
+
+    public KundeVO(String nachname, String vorname, String geschlecht, LocalDate geburtsdatum, Bestellung bestellung) {
+        this(nachname, vorname, geschlecht, geburtsdatum);
+        this.setBestellung(bestellung);
     }
 
     public int getID() {
@@ -98,6 +105,18 @@ public class KundeVO {
         return this.getGeburtsdatum().format(DateTimeFormatter.ofPattern("dd.MMM.yyyy"));
     }
 
+    public Bestellung getBestellung() {
+        return bestellung;
+    }
+
+    public void setBestellung(Bestellung bestellung) {
+        this.bestellung = bestellung;
+    }
+
+    public boolean hasBestellung() {
+        return this.getBestellung() != null;
+    }
+
     public int hashCode() {
         final int hashMultiplier = 31;
         int hc = 1;
@@ -106,6 +125,7 @@ public class KundeVO {
         hc = hashMultiplier * hc + ((this.getGeschlecht() == null) ? 0 : this.getGeschlecht().hashCode());
         hc = hashMultiplier * hc + ((this.getNachname() == null) ? 0 : this.getNachname().hashCode());
         hc = hashMultiplier * hc + ((this.getVorname() == null) ? 0 : this.getVorname().hashCode());
+        hc = hashMultiplier * hc + ((this.getBestellung() == null) ? 0 : this.getBestellung().hashCode());
         return hc;
     }
 
@@ -124,6 +144,4 @@ public class KundeVO {
     public String toString() {
         return "Kunde " + this.getVorname() + " " + this.getNachname() + " ist " + this.getGeschlecht() + " und " + this.berechneAlter() + " Jahre alt geboren am " + this.getGeburtsdatumStr();
     }
-
-
 }

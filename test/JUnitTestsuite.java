@@ -3,6 +3,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ JUnitTestKochVO.class, JUnitTestKundeVO.class,
-		JUnitTestPizzaVO.class })
+		JUnitTestPizzaVO.class, JUnitTestBestellung.class })
 public class JUnitTestsuite {
 }

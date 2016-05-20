@@ -45,7 +45,7 @@ public class Main {
 
         System.out.println(kundeVO);
         
-        Bestellung best = new Bestellung(LocalDateTime.MIN, LocalDateTime.MAX);
+        Bestellung best = new Bestellung(LocalDateTime.MIN, LocalDateTime.MAX, kundeVO);
         
         System.out.println(best);
     }
